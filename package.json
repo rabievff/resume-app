@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "preview": "firebase serve --only hosting",
     "lint": "eslint",
     "deploy": "next build && firebase deploy --only hosting"
   },
