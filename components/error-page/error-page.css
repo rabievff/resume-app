@@ -1,0 +1,205 @@
+/*
+ * Стили страницы ошибок, перенесены из проекта 404_error.
+ * Все селекторы начинаются с .error-page, чтобы не задевать основной сайт.
+ * Базовая тема тёмная; светлая включается, когда на <html> нет класса .dark (next-themes).
+ */
+
+.error-page {
+  position: relative;
+  display: flex;
+  min-height: 100svh;
+  flex-direction: column;
+  overflow: hidden;
+  isolation: isolate;
+  background: radial-gradient(circle at 74% 43%, rgb(22 113 255 / 14%), transparent 33%), linear-gradient(145deg, #050713 0%, #090d1d 48%, #050713 100%);
+  color: #f5f8ff;
+  font-family: var(--font-geist-sans), Arial, sans-serif;
+}
+
+.error-page button,
+.error-page a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.error-page .grid-noise {
+  position: absolute; inset: 0; z-index: -3; opacity: .2;
+  background-image: linear-gradient(rgb(255 255 255 / 3.5%) 1px, transparent 1px), linear-gradient(90deg, rgb(255 255 255 / 3.5%) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(to bottom, black, transparent 92%);
+}
+
+.error-page .aurora { position: absolute; z-index: -2; border-radius: 999px; filter: blur(110px); pointer-events: none; }
+.error-page .aurora-one { top: -25%; right: -8%; width: 520px; height: 520px; background: rgb(0 122 255 / 16%); }
+.error-page .aurora-two { bottom: -28%; left: 18%; width: 460px; height: 460px; background: rgb(158 255 56 / 7%); }
+
+.error-page .site-header,
+.error-page .error-footer { display: flex; width: min(100% - 48px, 1320px); margin-inline: auto; align-items: center; justify-content: space-between; }
+.error-page .site-header { min-height: 104px; border-bottom: 1px solid rgb(255 255 255 / 10%); }
+.error-page .brand { display: inline-flex; align-items: center; gap: 12px; color: #f6f9ff; text-decoration: none; }
+.error-page .brand-mark { display: grid; width: 42px; height: 42px; place-items: center; border: 1px solid rgb(126 198 255 / 46%); border-radius: 12px; background: linear-gradient(145deg, rgb(33 141 255 / 22%), rgb(255 255 255 / 2%)); color: #6fc4ff; font-family: var(--font-russo-one), sans-serif; font-weight: 400; box-shadow: inset 0 0 20px rgb(55 148 255 / 8%); }
+.error-page .brand > span:last-child { display: grid; gap: 3px; }
+.error-page .brand strong { font-family: var(--font-russo-one), sans-serif; font-size: .94rem; font-weight: 400; letter-spacing: .11em; }
+.error-page .brand small { color: rgb(205 218 242 / 50%); font-family: var(--font-geist-mono), monospace; font-size: .68rem; letter-spacing: .12em; }
+.error-page .header-actions { display: flex; align-items: center; gap: 10px; }
+.error-page .status-pill { display: inline-flex; align-items: center; gap: 9px; border: 1px solid rgb(255 255 255 / 10%); border-radius: 999px; padding: 9px 14px; color: rgb(229 238 255 / 72%); font-size: .82rem; }
+.error-page .status-pill i { width: 7px; height: 7px; border-radius: 50%; background: #a3ff4b; box-shadow: 0 0 14px #a3ff4b; animation: error-pulse 2.2s ease-in-out infinite; }
+.error-page .theme-toggle { display: grid; width: 40px; height: 40px; place-items: center; border: 1px solid rgb(255 255 255 / 10%); border-radius: 999px; background: rgb(255 255 255 / 4%); color: #8dd1ff; cursor: pointer; transition: transform 180ms ease, border-color 180ms ease, background 180ms ease; }
+.error-page .theme-toggle:hover { transform: rotate(8deg); border-color: rgb(137 206 255 / 36%); background: rgb(137 206 255 / 8%); }
+.error-page .lang-switch { position: relative; display: grid; width: 92px; height: 40px; flex-shrink: 0; grid-template-columns: 1fr 1fr; align-items: center; border: 1px solid rgb(255 255 255 / 10%); border-radius: 999px; padding: 4px; background: rgb(255 255 255 / 4%); font: inherit; cursor: pointer; user-select: none; transition: border-color 180ms ease, background 180ms ease; }
+.error-page .lang-switch:hover { border-color: rgb(137 206 255 / 36%); background: rgb(137 206 255 / 8%); }
+.error-page .lang-switch-thumb { position: absolute; inset: 4px auto 4px 4px; width: calc(50% - 4px); border-radius: 999px; background: #89ceff; box-shadow: 0 0 18px rgb(51 162 255 / 32%); transition: transform 300ms cubic-bezier(.34, 1.56, .64, 1), background 300ms ease, box-shadow 300ms ease; }
+.error-page .lang-switch[data-lang='en'] .lang-switch-thumb { transform: translateX(100%); background: #a3ff4b; box-shadow: 0 0 18px rgb(163 255 75 / 30%); }
+.error-page .lang-switch-option { position: relative; z-index: 1; color: rgb(229 238 255 / 62%); font-family: var(--font-geist-mono), monospace; font-size: .72rem; font-weight: 600; letter-spacing: .08em; text-align: center; transition: color 300ms ease; }
+.error-page .lang-switch-option.is-active { color: #07101f; }
+
+.error-page .error-layout { display: grid; width: min(100% - 48px, 1320px); min-height: calc(100svh - 178px); margin: auto; grid-template-columns: minmax(0, .9fr) minmax(440px, 1.1fr); align-items: center; gap: clamp(28px, 4vw, 76px); padding-block: clamp(42px, 6vh, 78px); }
+.error-page .copy-column { position: relative; z-index: 3; max-width: 660px; }
+.error-page .eyebrow { display: flex; align-items: center; gap: 12px; color: #8dd1ff; font-family: var(--font-geist-mono), monospace; font-size: .74rem; letter-spacing: .14em; }
+.error-page .eyebrow-line { width: 44px; height: 1px; background: rgb(140 211 255 / 40%); }
+.error-page .giant-code { position: absolute; top: -108px; left: -12px; z-index: -1; margin: 0; color: rgb(184 224 255 / 12%); font-family: var(--font-geist-sans), Arial, sans-serif; font-size: clamp(10rem, 18vw, 17rem); font-weight: 800; line-height: .8; letter-spacing: -.1em; -webkit-text-stroke: 1px rgb(112 196 255 / 18%); text-shadow: 0 0 42px rgb(40 148 255 / 9%); user-select: none; }
+.error-page h1 { max-width: 720px; margin: 24px 0 0; color: #f5f8ff; font-family: var(--font-russo-one), sans-serif; font-size: clamp(2.55rem, 5.2vw, 5rem); font-weight: 400; line-height: 1.02; letter-spacing: -.045em; }
+.error-page h1 span { color: #83caff; }
+.error-page .description { max-width: 590px; margin: 28px 0 0; color: rgb(210 224 248 / 68%); font-size: clamp(1rem, 1.25vw, 1.16rem); line-height: 1.62; }
+.error-page .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+.error-page .primary-action,
+.error-page .secondary-action { display: inline-flex; min-height: 52px; align-items: center; justify-content: center; gap: 10px; border-radius: 14px; padding: 0 20px; font: inherit; font-size: .94rem; font-weight: 650; cursor: pointer; text-decoration: none; transition: transform 180ms ease, border-color 180ms ease, background 180ms ease; }
+.error-page .primary-action { border: 1px solid #94d5ff; background: #89ceff; color: #07101f; box-shadow: 0 12px 38px rgb(51 162 255 / 18%); }
+.error-page .secondary-action { border: 1px solid rgb(255 255 255 / 13%); background: rgb(255 255 255 / 4.5%); color: rgb(239 246 255 / 86%); }
+.error-page .primary-action:hover,
+.error-page .secondary-action:hover,
+.error-page .telegram-card:hover { transform: translateY(-2px); }
+.error-page .secondary-action:hover { border-color: rgb(137 206 255 / 36%); background: rgb(137 206 255 / 8%); }
+.error-page .primary-action:focus-visible,
+.error-page .secondary-action:focus-visible,
+.error-page .telegram-card:focus-visible,
+.error-page .brand:focus-visible,
+.error-page .theme-toggle:focus-visible,
+.error-page .lang-switch:focus-visible { outline: 3px solid rgb(163 255 75 / 60%); outline-offset: 4px; }
+
+.error-page .telegram-card { display: grid; max-width: 390px; margin-top: 24px; grid-template-columns: auto 1fr auto; align-items: center; gap: 13px; border: 1px solid rgb(255 255 255 / 10%); border-radius: 17px; padding: 13px 15px; background: rgb(255 255 255 / 3.5%); color: #eef6ff; text-decoration: none; backdrop-filter: blur(14px); transition: transform 180ms ease, border-color 180ms ease, background 180ms ease; }
+.error-page .telegram-card:hover { border-color: rgb(112 196 255 / 35%); background: rgb(76 165 255 / 7%); }
+.error-page .telegram-icon { display: grid; width: 42px; height: 42px; place-items: center; border-radius: 12px; background: #218dff; color: white; }
+.error-page .telegram-card > span:nth-child(2) { display: grid; gap: 3px; }
+.error-page .telegram-card small { color: rgb(205 220 245 / 50%); font-size: .74rem; }
+.error-page .telegram-card strong { font-size: .97rem; }
+.error-page .telegram-arrow { color: rgb(207 225 249 / 44%); }
+
+.error-page .visual-column { position: relative; min-height: 660px; align-self: stretch; isolation: isolate; }
+/* Маскот крупнее своей колонки и заезжает на шапку — декор не должен перехватывать клики по кнопкам */
+.error-page .visual-404,
+.error-page .mascot-glow,
+.error-page .mascot,
+.error-page .signal-card { pointer-events: none; }
+.error-page .visual-404 { position: absolute; top: 3%; left: 50%; z-index: 0; margin: 0; transform: translateX(-50%); color: rgb(184 224 255 / 15%); font-family: var(--font-russo-one), sans-serif; font-size: clamp(13rem, 24vw, 26rem); font-weight: 400; line-height: 1; letter-spacing: -.1em; -webkit-text-stroke: 1px rgb(112 196 255 / 27%); text-shadow: 0 0 54px rgb(40 148 255 / 12%); white-space: nowrap; animation: error-code-breathe 6.5s ease-in-out infinite; }
+.error-page .visual-404 span { color: rgb(78 161 255 / 18%); }
+.error-page .mascot-glow { position: absolute; top: 18%; left: 50%; z-index: 1; width: 62%; aspect-ratio: 1; transform: translateX(-50%); border-radius: 50%; background: rgb(28 132 255 / 17%); filter: blur(72px); }
+.error-page .mascot { position: absolute; inset: 50% auto auto 50%; z-index: 2; width: min(100%, 670px); height: auto; transform: translate(-50%, -50%); object-fit: contain; mix-blend-mode: screen; filter: saturate(1.08) contrast(1.03); animation: error-float 5.5s ease-in-out infinite; }
+.error-page .signal-card { position: absolute; z-index: 2; display: grid; gap: 4px; min-width: 144px; border: 1px solid rgb(125 197 255 / 20%); border-radius: 15px; padding: 12px 15px; background: rgb(7 13 31 / 65%); box-shadow: 0 18px 46px rgb(0 0 0 / 22%); backdrop-filter: blur(16px); font-family: var(--font-geist-mono), monospace; }
+.error-page .signal-card span { color: rgb(185 207 238 / 45%); font-size: .65rem; letter-spacing: .13em; }
+.error-page .signal-card strong { color: #a3ff4b; font-size: .82rem; font-weight: 520; }
+.error-page .signal-top { top: 19%; right: 0; transform: rotate(3deg); }
+.error-page .signal-bottom { bottom: 15%; left: -2%; transform: rotate(-2deg); }
+
+.error-page .error-footer { min-height: 74px; border-top: 1px solid rgb(255 255 255 / 8%); color: rgb(190 205 232 / 38%); font-family: var(--font-geist-mono), monospace; font-size: .69rem; letter-spacing: .08em; text-transform: uppercase; }
+
+@keyframes error-float { 0%, 100% { transform: translate(-50%, -50%) rotate(-1deg); } 50% { transform: translate(-50%, calc(-50% - 12px)) rotate(1deg); } }
+@keyframes error-code-breathe { 0%, 100% { transform: translateX(-50%) scale(.97); opacity: .72; } 50% { transform: translateX(-50%) scale(1.025); opacity: 1; } }
+@keyframes error-pulse { 0%, 100% { opacity: .55; } 50% { opacity: 1; } }
+
+/* ---------- Светлая тема ---------- */
+:root:not(.dark) .error-page {
+  background: radial-gradient(circle at 74% 43%, rgb(32 144 255 / 18%), transparent 35%), linear-gradient(145deg, #f8fcff 0%, #eaf6ff 52%, #f6fbff 100%);
+  color: #0d2b44;
+}
+:root:not(.dark) .error-page .grid-noise { opacity: .3; background-image: linear-gradient(rgb(17 82 138 / 7%) 1px, transparent 1px), linear-gradient(90deg, rgb(17 82 138 / 7%) 1px, transparent 1px); }
+:root:not(.dark) .error-page .site-header,
+:root:not(.dark) .error-page .error-footer { border-color: rgb(27 75 117 / 13%); }
+:root:not(.dark) .error-page .brand { color: #0b2841; }
+:root:not(.dark) .error-page .brand-mark { border-color: rgb(25 125 210 / 30%); background: linear-gradient(145deg, rgb(33 141 255 / 18%), rgb(255 255 255 / 70%)); color: #087cd5; box-shadow: inset 0 0 20px rgb(55 148 255 / 8%); }
+:root:not(.dark) .error-page .brand small { color: rgb(26 65 102 / 58%); }
+:root:not(.dark) .error-page .status-pill,
+:root:not(.dark) .error-page .theme-toggle { border-color: rgb(23 86 141 / 14%); background: rgb(255 255 255 / 54%); color: #156fae; }
+:root:not(.dark) .error-page .lang-switch { border-color: rgb(23 86 141 / 14%); background: rgb(255 255 255 / 54%); }
+:root:not(.dark) .error-page .lang-switch:hover { border-color: rgb(20 119 187 / 30%); background: rgb(255 255 255 / 80%); }
+:root:not(.dark) .error-page .lang-switch-thumb { background: #1374b3; box-shadow: 0 6px 16px rgb(19 116 179 / 24%); }
+:root:not(.dark) .error-page .lang-switch[data-lang='en'] .lang-switch-thumb { background: #347600; box-shadow: 0 6px 16px rgb(52 118 0 / 22%); }
+:root:not(.dark) .error-page .lang-switch-option { color: rgb(23 61 92 / 62%); }
+:root:not(.dark) .error-page .lang-switch-option.is-active { color: #fff; }
+:root:not(.dark) .error-page .eyebrow { color: #157ab9; }
+:root:not(.dark) .error-page .eyebrow-line { background: rgb(21 122 185 / 35%); }
+:root:not(.dark) .error-page .giant-code { color: rgb(13 70 112 / 11%); -webkit-text-stroke-color: rgb(20 118 187 / 19%); text-shadow: 0 0 42px rgb(31 136 208 / 8%); }
+:root:not(.dark) .error-page h1 { color: #0d2b44; }
+:root:not(.dark) .error-page h1 span { color: #167fbd; }
+:root:not(.dark) .error-page .description { color: rgb(22 56 87 / 72%); }
+:root:not(.dark) .error-page .secondary-action { border-color: rgb(20 77 126 / 16%); background: rgb(255 255 255 / 58%); color: #173d5c; }
+:root:not(.dark) .error-page .secondary-action:hover { border-color: rgb(20 119 187 / 30%); background: rgb(91 182 245 / 10%); }
+:root:not(.dark) .error-page .telegram-card { border-color: rgb(20 77 126 / 15%); background: rgb(255 255 255 / 62%); color: #123653; box-shadow: 0 18px 50px rgb(28 92 139 / 8%); }
+:root:not(.dark) .error-page .telegram-card:hover { border-color: rgb(20 119 187 / 28%); background: rgb(255 255 255 / 84%); }
+:root:not(.dark) .error-page .telegram-card small { color: rgb(30 72 106 / 58%); }
+:root:not(.dark) .error-page .telegram-arrow { color: rgb(24 84 130 / 48%); }
+:root:not(.dark) .error-page .visual-404 { color: rgb(10 70 116 / 13%); -webkit-text-stroke-color: rgb(20 118 187 / 25%); text-shadow: 0 0 54px rgb(31 136 208 / 10%); }
+:root:not(.dark) .error-page .visual-404 span { color: rgb(31 136 208 / 20%); }
+:root:not(.dark) .error-page .mascot { mix-blend-mode: multiply; filter: saturate(1.12) contrast(1.04); }
+:root:not(.dark) .error-page .mascot-glow { background: rgb(28 132 255 / 16%); }
+:root:not(.dark) .error-page .signal-card { border-color: rgb(38 124 185 / 22%); background: rgb(245 251 255 / 78%); box-shadow: 0 18px 46px rgb(21 77 119 / 13%); }
+:root:not(.dark) .error-page .signal-card span { color: rgb(27 65 97 / 52%); }
+:root:not(.dark) .error-page .signal-card strong { color: #347600; }
+:root:not(.dark) .error-page .error-footer { color: rgb(25 64 96 / 48%); }
+
+/* ---------- Адаптив ---------- */
+@media (max-width: 980px) {
+  .error-page .error-layout { grid-template-columns: 1fr .9fr; gap: 12px; }
+  .error-page .visual-column { min-height: 570px; }
+  .error-page .signal-top { right: -8%; }
+  .error-page .signal-bottom { left: -8%; }
+}
+
+@media (max-width: 900px) {
+  .error-page .site-header,
+  .error-page .error-footer,
+  .error-page .error-layout { width: min(100% - 32px, 620px); }
+  .error-page .site-header { min-height: 82px; }
+  .error-page .brand small { display: none; }
+  .error-page .error-layout { grid-template-columns: 1fr; align-content: start; padding-top: 52px; }
+  .error-page h1 { font-size: clamp(2.5rem, 12vw, 4.2rem); }
+  .error-page .visual-column { min-height: 510px; }
+  .error-page .mascot { width: min(112%, 540px); }
+  .error-page .visual-404 { top: 2%; font-size: 48vw; }
+  .error-page .signal-card { min-width: 124px; }
+  .error-page .signal-top { top: 14%; right: 1%; }
+  .error-page .signal-bottom { bottom: 8%; left: 1%; }
+  .error-page .copy-column { padding-bottom: 36px; }
+  .error-page .error-footer { min-height: 64px; }
+}
+
+@media (max-width: 460px) {
+  .error-page .status-pill { padding-inline: 11px; font-size: .76rem; }
+  .error-page .visual-column { min-height: 430px; }
+  .error-page .signal-card { padding: 9px 11px; }
+  .error-page .actions { display: grid; grid-template-columns: 1fr; }
+  .error-page .primary-action,
+  .error-page .secondary-action { width: 100%; }
+  .error-page .error-footer span:first-child { display: none; }
+  .error-page .error-footer { justify-content: center; }
+}
+
+@media (max-width: 390px) {
+  .error-page .status-pill { display: none; }
+  .error-page .visual-column { min-height: 380px; }
+  .error-page .signal-card { transform: scale(.9); }
+  .error-page .signal-top { right: -3%; }
+  .error-page .signal-bottom { left: -3%; }
+}
+
+@media (max-height: 780px) and (min-width: 901px) {
+  .error-page .site-header { min-height: 82px; }
+  .error-page .error-layout { min-height: calc(100svh - 146px); padding-block: 30px; }
+  .error-page .visual-column { min-height: 530px; }
+  .error-page h1 { font-size: clamp(2.7rem, 4.5vw, 4.25rem); }
+  .error-page .description { margin-top: 20px; }
+  .error-page .actions { margin-top: 24px; }
+  .error-page .telegram-card { margin-top: 16px; }
+  .error-page .error-footer { min-height: 64px; }
+}
+
+/* Анимации не отключаются по prefers-reduced-motion — так же, как на основном сайте (см. globals.css) */

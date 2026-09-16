@@ -1,0 +1,238 @@
+@import "tailwindcss";
+
+/*
+ * Tailwind v4 по умолчанию строит вариант dark: на prefers-color-scheme.
+ * Тема переключается классом через next-themes, поэтому вариант переопределён.
+ */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * Палитра: глубокий тёмно-синий и коралловый, как в современных финтех-приложениях,
+ * плюс синий, мятный и солнечный для акцентов. Цвета технологий — в lib/tech-colors.ts.
+ */
+:root {
+  --bg: #f5f6fa;
+  --surface: #ffffff;
+  --surface-muted: #eef0f6;
+  --ink: #14233c;
+  --muted: #56617a;
+  --line: #e2e6ef;
+  --coral: #f2503f;
+  --blue: #2a5ee8;
+  --mint: #12a883;
+  --sun: #ffc845;
+  --code-bg: #14233c;
+  --telegram: #1976c8;
+  --telegram-hover: #1565b0;
+}
+
+.dark {
+  --bg: #0b1322;
+  --surface: #121c2e;
+  --surface-muted: #18243a;
+  --ink: #eaf0fa;
+  --muted: #9aa6bd;
+  --line: #22304a;
+  --coral: #ff6b5f;
+  --blue: #6c9bff;
+  --mint: #3ddbb2;
+  --sun: #ffd166;
+  --code-bg: #0f1a2c;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-coral: var(--coral);
+  --color-blue: var(--blue);
+  --color-mint: var(--mint);
+  --color-sun: var(--sun);
+  --color-code-bg: var(--code-bg);
+  --color-telegram: var(--telegram);
+  --color-telegram-hover: var(--telegram-hover);
+
+  --font-display: var(--font-geologica), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-golos), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, "SFMono-Regular", monospace;
+}
+
+@utility font-heading {
+  font-family: var(--font-display);
+  font-variation-settings: "SHRP" 40;
+  letter-spacing: -0.025em;
+}
+
+/* Маркерное выделение, которое переносится вместе со строкой */
+@utility marker-highlight {
+  background-image: linear-gradient(
+    transparent 60%,
+    color-mix(in oklab, var(--sun) 70%, transparent) 60%,
+    color-mix(in oklab, var(--sun) 70%, transparent) 92%,
+    transparent 92%
+  );
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* Базовые правила в слое base: вне слоя они перебили бы утилиты вроде text-white */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background: var(--bg);
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+
+  ::selection {
+    background: var(--coral);
+    color: #ffffff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  /* Липкая шапка не должна перекрывать заголовок секции при переходе по якорю */
+  section[id] {
+    scroll-margin-top: 5.5rem;
+  }
+}
+
+.dark .marker-highlight {
+  background-image: linear-gradient(
+    transparent 62%,
+    color-mix(in oklab, var(--sun) 28%, transparent) 62%,
+    color-mix(in oklab, var(--sun) 28%, transparent) 92%,
+    transparent 92%
+  );
+}
+
+/* Точечная сетка за первым экраном */
+.dot-grid {
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  mask-image: radial-gradient(ellipse 70% 60% at 70% 40%, #000 30%, transparent 75%);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  from {
+    transform: translateY(-5px);
+  }
+  to {
+    transform: translateY(5px);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--mint) 60%, transparent);
+  }
+  100% {
+    box-shadow: 0 0 0 8px transparent;
+  }
+}
+
+.animate-rise {
+  animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.animate-float {
+  animation: float 3.2s ease-in-out infinite alternate;
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 1.8s ease-out infinite;
+}
+
+/*
+ * Анимации намеренно не отключаются по prefers-reduced-motion: на Windows эта настройка
+ * включается вместе с «Эффекты анимации: выкл», и на таких ПК сайт выглядел застывшим.
+ * Движения мягкие: появление, лёгкое покачивание меток, пульс точки и параллакс фото.
+ */
+
+/* Печать страницы -> «Сохранить как PDF» в диалоге браузера */
+@media print {
+  @page {
+    margin: 12mm;
+  }
+
+  :root,
+  .dark {
+    --bg: #ffffff;
+    --surface: #ffffff;
+    --surface-muted: #ffffff;
+    --ink: #000000;
+    --muted: #444444;
+    --line: #cccccc;
+  }
+
+  html {
+    font-size: 13px;
+  }
+
+  [data-print-hidden],
+  header,
+  button {
+    display: none !important;
+  }
+
+  .animate-rise,
+  .animate-float,
+  .animate-pulse-ring {
+    animation: none !important;
+  }
+
+  * {
+    box-shadow: none !important;
+  }
+
+  section {
+    padding-block: 1.5rem !important;
+  }
+
+  article,
+  li {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Сайты работодателей печатаются адресом — их можно проверить и с бумаги */
+  a[data-print-url]::after {
+    content: " " attr(data-print-url);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+}
