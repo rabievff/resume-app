@@ -1,14 +1,12 @@
 import type { Dictionary } from "./types";
 
-export const ru: Dictionary = {
+export const ru: Dictionary<"ru"> = {
   locale: "ru",
-  htmlLang: "ru",
   meta: {
     title: "Фирдавс Рабиев — fullstack-разработчик (React, Next.js, Go)",
     jobTitle: "Fullstack-разработчик",
     description:
       "Веб-приложения целиком: интерфейсы на React и Next.js, бэкенд на Go. С 2022 года — разработчик в Dushanbe City Bank.",
-    ogLocale: "ru_RU",
     keywords: [
       "Фирдавс Рабиев",
       "fullstack-разработчик",
@@ -77,25 +75,22 @@ export const ru: Dictionary = {
   services: {
     title: "Услуги",
     subtitle: "Чем могу быть полезен",
-    items: [
-      {
-        key: "frontend",
+    items: {
+      frontend: {
         name: "Фронтенд на React и Next.js",
         description:
           "Интерфейсы веб-сервисов, личных кабинетов и сайтов, которые одинаково удобны на телефоне, планшете и компьютере: вёрстка, компоненты, подключение к API, SSR и SEO.",
       },
-      {
-        key: "backend",
+      backend: {
         name: "Бэкенд на Go",
         description:
           "API, базы данных и админ-панели с журналом действий и выгрузкой отчётов — фронтенд и бэкенд ведёт один человек.",
       },
-      {
-        key: "documents",
+      documents: {
         name: "Автоматизация документов",
         description: "Генерация договоров, отчётов и счетов в PDF вместо ручной работы.",
       },
-    ],
+    },
   },
   projects: {
     title: "Проекты",

@@ -1,14 +1,12 @@
 import type { Dictionary } from "./types";
 
-export const en: Dictionary = {
+export const en: Dictionary<"en"> = {
   locale: "en",
-  htmlLang: "en",
   meta: {
     title: "Firdavs Rabiev — Fullstack Developer (React, Next.js, Go)",
     jobTitle: "Fullstack Developer",
     description:
       "End-to-end web apps: React and Next.js on the front, Go on the back. Developer at Dushanbe City Bank since 2022.",
-    ogLocale: "en_US",
     keywords: [
       "Firdavs Rabiev",
       "fullstack developer",
@@ -77,25 +75,22 @@ export const en: Dictionary = {
   services: {
     title: "Services",
     subtitle: "How I can help",
-    items: [
-      {
-        key: "frontend",
+    items: {
+      frontend: {
         name: "Frontend with React and Next.js",
         description:
           "Interfaces for web services, customer dashboards and websites that work equally well on phones, tablets and desktops: layout, components, API integration, SSR and SEO.",
       },
-      {
-        key: "backend",
+      backend: {
         name: "Go backend",
         description:
           "APIs, databases and admin panels with an activity log and report exports, so one person owns both frontend and backend.",
       },
-      {
-        key: "documents",
+      documents: {
         name: "Document automation",
         description: "Generating contracts, reports and invoices as PDF instead of doing it by hand.",
       },
-    ],
+    },
   },
   projects: {
     title: "Projects",
