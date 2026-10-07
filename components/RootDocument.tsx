@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { ThemeProvider } from "next-themes";
-import type { Dictionary } from "@/content/types";
+import { localeTags, type Dictionary } from "@/content/types";
 import { fontVariables } from "@/lib/fonts";
 import { site } from "@/lib/site";
 
@@ -27,7 +27,7 @@ export function RootDocument({ dict, children }: RootDocumentProps) {
   };
 
   return (
-    <html lang={dict.htmlLang} className={fontVariables} suppressHydrationWarning>
+    <html lang={localeTags[dict.locale].htmlLang} className={fontVariables} suppressHydrationWarning>
       <body className="bg-bg font-sans text-ink antialiased">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           {children}

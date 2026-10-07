@@ -1,6 +1,6 @@
 import type { ComponentType, CSSProperties, SVGProps } from "react";
 import { CodeBracketIcon, DocumentTextIcon, ServerStackIcon } from "@heroicons/react/24/outline";
-import type { Dictionary, ServiceKey } from "@/content/types";
+import { serviceKeys, type Dictionary, type ServiceKey } from "@/content/types";
 import { Section } from "./Section";
 
 type ServicesProps = {
@@ -20,12 +20,13 @@ export function Services({ dict }: ServicesProps) {
   return (
     <Section id="services" title={services.title} subtitle={services.subtitle}>
       <ul className="grid gap-5 md:grid-cols-3">
-        {services.items.map((service) => {
-          const { icon: Icon, color } = serviceStyle[service.key];
+        {serviceKeys.map((key) => {
+          const service = services.items[key];
+          const { icon: Icon, color } = serviceStyle[key];
 
           return (
             <li
-              key={service.key}
+              key={key}
               style={{ "--accent": color } as CSSProperties}
               className="group rounded-3xl border border-line bg-surface p-7 transition-all hover:-translate-y-1 hover:border-[color-mix(in_oklab,var(--accent)_45%,transparent)] hover:shadow-[0_24px_50px_-28px_rgba(20,35,60,0.45)]"
             >

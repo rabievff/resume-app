@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import type { Dictionary } from "@/content/types";
+import { locales, localeTags, type Dictionary } from "@/content/types";
 import { site } from "./site";
 
 export function buildMetadata(dict: Dictionary): Metadata {
@@ -23,8 +23,9 @@ export function buildMetadata(dict: Dictionary): Metadata {
     },
     openGraph: {
       type: "profile",
-      locale: dict.meta.ogLocale,
-      alternateLocale: dict.locale === "ru" ? ["en_US"] : ["ru_RU"],
+      locale: localeTags[dict.locale].ogLocale,
+      // Остальные языки сайта, какими бы они ни стали: список ведётся в одном месте
+      alternateLocale: locales.filter((code) => code !== dict.locale).map((code) => localeTags[code].ogLocale),
       url: path,
       siteName: dict.hero.name,
       title: dict.meta.title,
